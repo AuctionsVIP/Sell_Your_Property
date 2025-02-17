@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sell Your Property - AuctionInc</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #0d0d0d, #2c2c2c, #666666);
+            background-size: 400% 400%;
+            animation: gradientAnimation 8s ease infinite;
+            color: white;
+            text-align: center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        /* Smooth Gradient Animation */
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .form-container {
+            width: 100%;
+            min-height: 100vh;
+            background-image: url('background.jpg');
+            background-size: cover;
+            background-position: center top;
+            background-repeat: no-repeat;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            position: relative;
+        }
+
+        .header {
+            position: absolute;
+            top: 34.5%;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            font-size: 30px;
+            font-weight: 900;
+            color: white;
+            width: 100%;
+            line-height: 0.8;
+        }
+
+        .header span {
+            color: red;
+        }
+
+        /* Reduce header size only on screens ≤ 360px */
+        @media screen and (max-width: 360px) {
+            .header span {
+                font-size: 85%; /* Reduce only slightly to avoid breaking layout */
+            }
+        }
+
+        /* "IN 3 WEEKS" Alignment Fix */
+        .in-3-weeks {
+            display: block;
+            text-align: left;
+            font-size: 45px;
+            color: black !important;
+            line-height: 1.2;
+            text-shadow: 3px 3px 10px rgba(255, 255, 255, 0.6);
+            width: 90%;
+            margin-left: 5%;
+        }
+
+        /* ✅ LOGO SIZE + POSITION FIX */
+        .logo {
+            width: 14vw;
+            max-width: 220px;
+            position: absolute;
+            top: 8vh;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Tablet Screens */
+        @media screen and (max-width: 1024px) {
+            .logo {
+                width: 18vw;
+                max-width: 200px;
+                top: 8vh;
+            }
+        }
+
+        /* Large Phones (Phablets) */
+        @media screen and (max-width: 768px) {
+            .logo {
+                width: 30vw;
+                max-width: 220px;
+                top: 7vh;
+            }
+        }
+
+        /* Medium-Sized Phones */
+        @media screen and (max-width: 600px) {
+            .logo {
+                width: 30vw;
+                max-width: 180px;
+                top: 8vh;
+            }
+        }
+
+        /* Small Phones */
+        @media screen and (max-width: 480px) {
+            .logo {
+                width: 35vw;
+                max-width: 180px;
+                top: 8vh;
+            }
+        }
+
+        /* Very Small Phones */
+        @media screen and (max-width: 375px) {
+            .logo {
+                width: 40vw;
+                max-width: 150px;
+                top: 10vh;
+            }
+        }
+
+        /* Adjustments for iPhone SE (320px width) */
+        @media screen and (max-width: 360px) {
+            .logo {
+                width: 32vw;
+                max-width: 120px;
+                top: 8vh;
+            }
+            input[type="text"], input[type="email"], input[type="tel"] {
+                width: 85%;
+            }
+        }
+
+        input[type="text"], input[type="email"], input[type="tel"] {
+            width: 90%;
+            padding: 12px;
+            margin: 8px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Form Positioning Fix */
+        form {
+            margin-top: 450px;
+        }
+
+        @media screen and (max-width: 768px) {
+            form {
+                margin-top: 420px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            form {
+                margin-top: 470px;
+            }
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 900;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: darkred;
+        }
+
+        /* Dark Themed Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background-color: #1e1e1e;
+            color: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 12px;
+            width: 350px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content h2 {
+            color: #4caf50;
+        }
+
+        .modal-content p {
+            margin-top: 10px;
+        }
+
+        .modal-content a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4caf50;
+            color: white;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .modal-content a:hover {
+            background-color: #45a049;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <img src="auctioninc-logo.png" alt="AuctionInc Logo" class="logo">
+            <div class="header">
+                <span style="font-size: 75px; color: white; text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.7);">SELL YOUR</span> <br>
+                <span style="font-size: 76px; color: red; text-shadow: 4px 4px 12px rgba(0, 0, 0, 0.7);">PROPERTY</span> <br>
+                <span class="in-3-weeks">IN 3 WEEKS</span>
+            </div>
+            <form id="propertyForm" action="https://api.web3forms.com/submit" method="POST">
+                <input type="hidden" name="access_key" value="d7e9d4ec-ac6e-4bfa-a963-fb16ae8a2038">
+                <input type="text" name="Source (Platform)" value="Instagram" readonly style="display: none;">
+                <input type="text" name="fullName" placeholder="Full Name" required>
+                <input type="tel" name="contactNumber" placeholder="Contact Number" required>
+                <input type="email" name="email" placeholder="Email Address" required>
+                <input type="text" name="propertyAddress" placeholder="Property Address" required>
+                <button type="submit">SEND ENQUIRY</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <h2>Form submitted successfully!</h2>
+            <p>Thank you! Your form has been successfully submitted.</p>
+            <a href="#" id="goBack">Go back</a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('propertyForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const form = event.target;
+
+            fetch(form.action, {
+                method: form.method,
+                body: new FormData(form)
+            })
+            .then(response => {
+                if (response.ok) {
+                    document.getElementById('successModal').style.display = 'flex';
+                } else {
+                    alert('Form submission failed. Please try again.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again.');
+            });
+        });
+
+        document.getElementById('goBack').addEventListener('click', function(event) {
+            event.preventDefault();
+            document.getElementById('successModal').style.display = 'none';
+        });
+    </script>
+
+    </body>
+    </html>
